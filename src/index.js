@@ -9,6 +9,7 @@ const ghRepoMock = {
   test: 'nothing'
 };
 
+alert(convert(ghRepoMock));
 console.log(convert(ghRepoMock));
 
 // game();
