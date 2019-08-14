@@ -1,3 +1,14 @@
-import game from './game/index'
+// import game from './game/index'
+import convert from './github/converter';
 
-game();
+
+const ghRepoMock = {
+  name: 'brains',
+  stargazers_count: 32,
+  license: { spdx_id: 'MIT' },
+  test: 'nothing'
+};
+
+console.log(convert(ghRepoMock));
+
+// game();
