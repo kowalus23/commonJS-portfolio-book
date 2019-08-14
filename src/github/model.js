@@ -6,7 +6,12 @@ export class GitHubRepo {
     this.rest = rest;
   }
 
+  get starsInfo() {
+    return this.stars > 0 ? `has (${this.stars}) stars` : '';
+  }
+
+
   toString() {
-    return `${this.name} has (${this.stars})stars`;
+    return `${this.name} ${this.starsInfo}`;
   }
 }
