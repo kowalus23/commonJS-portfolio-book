@@ -1,6 +1,5 @@
-// import game from './game/index'
+import game from './game/index'
 import convert from './github/converter';
-
 
 const ghRepoMock = {
   name: 'brains',
@@ -12,4 +11,4 @@ const ghRepoMock = {
 alert(convert(ghRepoMock));
 console.log(convert(ghRepoMock));
 
-// game();
+game();

@@ -10,7 +10,6 @@ export class GitHubRepo {
     return this.stars > 0 ? `has (${this.stars}) stars` : '';
   }
 
-
   toString() {
     return `${this.name} ${this.starsInfo}`;
   }
