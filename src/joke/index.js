@@ -1,3 +1,5 @@
 import getJoke from "../joke/service";
 
-export default getJoke();
+export default async function() {
+  await getJoke();
+};
