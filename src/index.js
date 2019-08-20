@@ -1,6 +1,7 @@
 // import game from './game/index'
 // import convert from './github/converter';
 import main from './github/index';
+import joke from './joke/index';
 //
 // const ghRepoMock = {
 //   name: 'brains',
@@ -10,5 +11,6 @@ import main from './github/index';
 // };
 //
 main();
+joke();
 // alert(convert(ghRepoMock));
 // game();
