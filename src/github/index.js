@@ -1,5 +1,5 @@
 import getRepos from './service';
 
 export default async function () {
-  (await getRepos()).forEach(r => console.log(r))
+  (await getRepos()).forEach(repo => console.log(repo))
 }

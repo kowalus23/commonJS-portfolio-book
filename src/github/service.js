@@ -18,7 +18,7 @@ export default async function getRepos() {
     const response = await fetch(REPOS_URL);
     if (response.ok) {
       return (await response.json())
-        .filter(r => !FORBIDDEN_REPOS.includes(r.name))
+        .filter(repo => !FORBIDDEN_REPOS.includes(repo.name))
         .map(convert);
     }
     throw Error('Response not 200');

@@ -28,7 +28,7 @@ export default async function () {
       await alternateResponse();
     }
   } catch (err) {
-    console.log('Network lost or bad URL', err);
+    console.log(err);
     return [];
   }
 }
