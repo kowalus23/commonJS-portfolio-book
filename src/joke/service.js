@@ -1,11 +1,11 @@
-const apiUrlDialog = 'https://official-joke-api.appspot.com/random_joke';
-const apiUrlChuck = 'http://api.icndb.com/jokes/random?limitTo=[nerdy]';
+const DIALOG_URL = 'https://official-joke-api.appspot.com/random_joke';
+const CHUCK_URL = 'http://api.icndb.com/jokes/random?limitTo=[nerdy]';
 import JokeDialog from './JokeDialog';
 import JokeChuckN from './JokeChuck';
 
 export default async function () {
   try {
-    const response = await fetch(apiUrlDialog);
+    const response = await fetch(DIALOG_URL);
 
     if (response.ok) {
       const obj = await response.json();
@@ -13,7 +13,7 @@ export default async function () {
       jokeDialog.showJoke();
 
       if (!jokeDialog.isTypeProgramming()) {
-        const response = await fetch(apiUrlChuck);
+        const response = await fetch(CHUCK_URL);
         if (response.ok) {
           const obj = await response.json();
           const jokeChuckN = new JokeChuckN(obj);
