@@ -10,7 +10,9 @@
   },
   "author": "Patryk Kowalski",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "markdown-element": "^2.0.2"
+  },
   "devDependencies": {
     "eslint": "^6.1.0",
     "eslint-config-airbnb-base": "^14.0.0",

@@ -27,6 +27,7 @@ export default async function () {
     } else {
       await alternateResponse();
     }
+    throw Error('Response not 200')
   } catch (err) {
     console.log(err);
     return [];
