@@ -3,7 +3,7 @@ import initMd from 'markdown-element';
 // import convert from './github/converter';
 // import main from './github/index';
 // import joke from './joke/index';
-import { getBlogPost } from './github/service'
+import init from './blog/index';
 //
 // const ghRepoMock = {
 //   name: 'brains',
@@ -12,12 +12,7 @@ import { getBlogPost } from './github/service'
 //   test: 'nothing'
 // };
 //
-getBlogPost('1.md').then((blogPost) => {
-  const md = document.createElement('mark-down');
-  md.textContent = blogPost;
-  document.body.appendChild(md);
-});
-
+init();
 // main();
 // joke();
 // alert(convert(ghRepoMock));

@@ -1,7 +1,7 @@
 import { GitHubRepo } from './model';
 
 const REPOS_URL = 'https://api.github.com/users/kowalus23/repos';
-const POSTS_URL = 'https://github.com/kowalus23/portfolio-book-posts/tree/master/blog/en/posts/'
+const POSTS_URL = 'https://raw.githubusercontent.com/kowalus23/portfolio-book-posts/master/blog/en/posts/'
 const FORBIDDEN_REPOS = ['basic-hooks-usage', 'ES6-exercises', 'Project-Warsztaty'];
 
 const convert = ({ name, stargazers_count: stars, license, ...rest }) => new GitHubRepo(
@@ -31,7 +31,7 @@ export default async function getRepos() {
 
 export async function getBlogPost(name = '0.md') {
   try {
-    const response = await fetch(`${POSTS_URL}${name}`, {mode: 'no-cors'});
+    const response = await fetch(`${POSTS_URL}${name}`);
     if (response.ok) {
       return (await response.text())
     }
