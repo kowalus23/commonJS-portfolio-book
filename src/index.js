@@ -1,3 +1,4 @@
+import style from './styles/index.scss';
 import initMd from 'markdown-element';
 // import game from './game/index'
 // import convert from './github/converter';

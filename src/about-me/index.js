@@ -1,3 +1,3 @@
 import { AboutMe } from './component';
 
-export default () => customElements.define('blog-post', AboutMe);
+export default () => customElements.define('about-me', AboutMe);
