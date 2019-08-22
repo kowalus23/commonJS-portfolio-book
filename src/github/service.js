@@ -1,7 +1,8 @@
 import { GitHubRepo } from './model';
 
 const REPOS_URL = 'https://api.github.com/users/kowalus23/repos';
-const POSTS_URL = 'https://raw.githubusercontent.com/kowalus23/portfolio-book-posts/master/blog/en/posts/'
+const RAW_URL = 'https://raw.githubusercontent.com/kowalus23/portfolio-book-posts/master/blog/en/';
+const POSTS_URL = 'https://raw.githubusercontent.com/kowalus23/portfolio-book-posts/master/blog/en/posts/';
 const FORBIDDEN_REPOS = ['basic-hooks-usage', 'ES6-exercises', 'Project-Warsztaty'];
 
 const convert = ({ name, stargazers_count: stars, license, ...rest }) => new GitHubRepo(
@@ -29,11 +30,12 @@ export default async function getRepos() {
   }
 }
 
-export async function getBlogPost(name = '0.md') {
+
+async function getRawFileContent(pathToFile) {
   try {
-    const response = await fetch(`${POSTS_URL}${name}`);
+    const response = await fetch(`${RAW_URL}${pathToFile}`);
     if (response.ok) {
-      return (await response.text())
+      return (await response.text());
     }
     throw Error('Response not 200');
   } catch (err) {
@@ -41,3 +43,12 @@ export async function getBlogPost(name = '0.md') {
     return [];
   }
 }
+
+export async function getBlogPost(name = '0.md') {
+  return getRawFileContent(`${POSTS_URL}${name}`);
+}
+
+export async function getAboutMe() {
+  return getRawFileContent('about-me.md');
+}
+

@@ -3,7 +3,8 @@ import initMd from 'markdown-element';
 // import convert from './github/converter';
 // import main from './github/index';
 // import joke from './joke/index';
-import init from './blog/index';
+import initAboutMe from './about-me/index'
+import initBlog from './blog/index';
 //
 // const ghRepoMock = {
 //   name: 'brains',
@@ -12,7 +13,8 @@ import init from './blog/index';
 //   test: 'nothing'
 // };
 //
-init();
+initAboutMe();
+initBlog();
 // main();
 // joke();
 // alert(convert(ghRepoMock));
