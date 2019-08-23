@@ -39,14 +39,14 @@ section.content {
     .item--button {
       position: relative;
       padding: 1em 2em;
-      border: 1px solid #1f1f1f;
+      border: 1px solid rgba(31, 31, 31, 0.5);
       transition: all 200ms ease-in-out;
       cursor: pointer;
       margin: 0.25em;
       border-radius: 2px;
 
       &:hover {
-        background-color: darken(#ffffff, 10%);
+        background-color: darken(#ffffff, 5%);
         border-color: transparent;
 
         &:after {
@@ -63,7 +63,7 @@ section.content {
         width: calc(100% + 1px);
         height: calc(100% + 1px);
         border-radius: 2px;
-        border: 1px solid rgba(23, 23, 23, 0.3);
+        border: 1px solid rgba(23, 23, 23, 0.25);
         transition: all 200ms ease-in-out;
         pointer-events: none;
       }
