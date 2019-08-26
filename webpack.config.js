@@ -36,10 +36,16 @@ module.exports = {
       template: 'src/blog/index.html',
       filename: 'blog/index.html'
     }),
-    new CopyWebpackPlugin([{
-      from: 'src/img',
-      to: 'img'
-    }]),
+    new CopyWebpackPlugin([
+      {
+        from: 'src/img',
+        to: 'img'
+      },
+      {
+        from: 'src/blog/img',
+        to: 'blog/img'
+      }
+    ]),
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // both options are optional

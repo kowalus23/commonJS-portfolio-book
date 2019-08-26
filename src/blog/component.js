@@ -17,12 +17,7 @@ class HtmlElementWithContent extends HTMLElement {
 
 export class Header extends HtmlElementWithContent {
   constructor() {
-    super('header', 'header', `
-     
-				        <h1 class="header-heading">From Advanced to Basics</h1>
-		
-    `);
-
+    super('header', 'header', `<h1 class="header-heading">From Advanced to Basics</h1>`);
   }
 }
 
@@ -35,6 +30,13 @@ export class Navigation extends HtmlElementWithContent {
 				    <li><a href="../index.html">About me</a></li>
 			  </ul>
     `);
+  }
+}
+
+export class Footer extends HtmlElementWithContent {
+  constructor() {
+    const copyright = `&copy; Copyright ${new Date().getFullYear()}`;
+    super('footer', 'footer', copyright)
   }
 }
 
