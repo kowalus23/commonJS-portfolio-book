@@ -1,4 +1,4 @@
-import { getBlogPost } from '../github/service';
+import { getBlogPost, getAllBlogPostNames } from '../github/service';
 import style from './style.scss';
 
 class HtmlElementWithContent extends HTMLElement {
@@ -44,8 +44,10 @@ export class Body extends HTMLElement {
   constructor() {
     super();
     const section = document.createElement('section');
-    section.className = 'content';
-    section.innerHTML = `
+    getAllBlogPostNames()
+      .then(posts => {
+        section.className = 'content';
+        section.innerHTML = `
      <style>
      .container {
          max-width: 70em;
@@ -81,13 +83,14 @@ export class Body extends HTMLElement {
     </style>
      <div class="container">
        <main>
-         <slot   name="posts"></slot>
+        ${posts.reverse().map(postName => `<blog-post post-name="${postName}"></blog-post>`).join('<hr>')}
        </main>
        <aside>
          <slot name="side-menu"></slot>
        </aside>
       </div>
     `;
+      });
     this.attachShadow({ mode: 'open' })
       .appendChild(section);
   }
@@ -116,9 +119,9 @@ export class BlogPost extends HTMLElement {
     this.shadow.appendChild(document.createElement('style')).innerHTML = `
       pre {
       width: 100%;
-      overflow-X: scroll;
+      overflow-X: auto;
       }
-    `
+    `;
   }
 
   clean() {
