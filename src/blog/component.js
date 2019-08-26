@@ -47,15 +47,19 @@ export class Body extends HTMLElement {
     this.render();
   }
 
-  async render() {
-    const posts = await getBlogPostNames();
+  async render(name = null) {
+    const fullPost = !!name;
+    const posts = fullPost ? [name] : await getBlogPostNames();
     this.shadowRoot.innerHTML = (`
      <section>
        ${this.renderStyles()}
       <div class="container">
        <main>
         ${posts.reverse()
-      .map(postName => `<blog-post post-name="${postName}"></blog-post>`)
+      .map((postName, index) => (`
+            <blog-post post-name="${postName}" full-post="${fullPost}"></blog-post>
+            <button id="${index}-${postName}">${fullPost ? 'Back' : 'Read more...'}</button>
+        `))
       .join('<hr>')}
        </main>
        <aside>
@@ -64,6 +68,16 @@ export class Body extends HTMLElement {
       </div>
      </section>
     `);
+    posts.forEach((postName, index) => {
+      this.shadowRoot.getElementById(`${index}-${postName}`)
+        .addEventListener('click', () => {
+          if (!fullPost) {
+            this.render(postName);
+          } else {
+            this.render();
+          }
+        })
+    })
   }
 
   renderStyles() {
@@ -106,7 +120,7 @@ export class Body extends HTMLElement {
 
 export class BlogPost extends HTMLElement {
   static get observedAttributes() {
-    return ['post-name'];
+    return ['post-name', 'full-post'];
   }
 
   constructor() {
@@ -115,21 +129,29 @@ export class BlogPost extends HTMLElement {
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
-    this.render();
+    if (oldValue !== newValue) {
+      this.render();
+    }
   }
 
   async render() {
     this.clean();
+    const fullPost = this.getAttribute('full-post') === 'true';
     const name = this.getAttribute('post-name');
-    const md = document.createElement('mark-down');
-    md.textContent = (await getBlogPost(`${name}.md`));
-    this.shadow.appendChild(md);
-    this.shadow.appendChild(document.createElement('style')).innerHTML = `
+    const content = (await getBlogPost(`${name}.md`));
+    this.shadowRoot.innerHTML = (`
+      <article>
+        <mark-down>
+            ${fullPost ? content : `${content.substr(0, 300)}...`}
+        </mark-down>
+      </article>
+      <style>
       pre {
-      width: 100%;
-      overflow-X: auto;
+        width: 100%;
+        overflow-X: auto;
       }
-    `;
+      </style>
+    `);
   }
 
   clean() {
