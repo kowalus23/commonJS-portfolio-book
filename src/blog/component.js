@@ -1,4 +1,4 @@
-import { getBlogPost, getAllBlogPostNames } from '../github/service';
+import { getBlogPost, getBlogPostNames } from '../github/service';
 import style from './style.scss';
 
 class HtmlElementWithContent extends HTMLElement {
@@ -43,23 +43,43 @@ export class Footer extends HtmlElementWithContent {
 export class Body extends HTMLElement {
   constructor() {
     super();
-    const section = document.createElement('section');
-    getAllBlogPostNames()
-      .then(posts => {
-        section.className = 'content';
-        section.innerHTML = `
-     <style>
+    this.attachShadow({ mode: 'open' });
+    this.render();
+  }
+
+  async render() {
+    const posts = await getBlogPostNames();
+    this.shadowRoot.innerHTML = (`
+     <section>
+       ${this.renderStyles()}
+      <div class="container">
+       <main>
+        ${posts.reverse()
+      .map(postName => `<blog-post post-name="${postName}"></blog-post>`)
+      .join('<hr>')}
+       </main>
+       <aside>
+         <slot name="side-menu"></slot>
+       </aside>
+      </div>
+     </section>
+    `);
+  }
+
+  renderStyles() {
+    return (`
+      <style>
      .container {
          max-width: 70em;
          margin: 0 auto;
      }
-     
+
      section {
         overflow: hidden;
         padding: 1em 1.25em;
         background-color: #ffffff;
      }
-     
+
      main, aside {
         margin-bottom: 1em;
      }
@@ -79,20 +99,8 @@ export class Body extends HTMLElement {
             margin-bottom: 1em;
         }
      }
-     
     </style>
-     <div class="container">
-       <main>
-        ${posts.reverse().map(postName => `<blog-post post-name="${postName}"></blog-post>`).join('<hr>')}
-       </main>
-       <aside>
-         <slot name="side-menu"></slot>
-       </aside>
-      </div>
-    `;
-      });
-    this.attachShadow({ mode: 'open' })
-      .appendChild(section);
+    `);
   }
 }
 
