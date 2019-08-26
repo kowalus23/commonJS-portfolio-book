@@ -36,7 +36,60 @@ export class Navigation extends HtmlElementWithContent {
 export class Footer extends HtmlElementWithContent {
   constructor() {
     const copyright = `&copy; Copyright ${new Date().getFullYear()}`;
-    super('footer', 'footer', copyright)
+    super('footer', 'footer', copyright);
+  }
+}
+
+export class Body extends HTMLElement {
+  constructor() {
+    super();
+    const section = document.createElement('section');
+    section.className = 'content';
+    section.innerHTML = `
+     <style>
+     .container {
+         max-width: 70em;
+         margin: 0 auto;
+     }
+     
+     section {
+        overflow: hidden;
+        padding: 1em 1.25em;
+        background-color: #ffffff;
+     }
+     
+     main, aside {
+        margin-bottom: 1em;
+     }
+     @media (min-width: 55em) {
+        section {
+            padding: 2em 3em;
+        }
+        main {
+            float: left;
+            width: 65%;
+            margin-right: 5%;
+            margin-bottom: 1em;
+        }
+        aside {
+            float: left;
+            width: 30%;
+            margin-bottom: 1em;
+        }
+     }
+     
+    </style>
+     <div class="container">
+       <main>
+         <slot   name="posts"></slot>
+       </main>
+       <aside>
+         <slot name="side-menu"></slot>
+       </aside>
+      </div>
+    `;
+    this.attachShadow({ mode: 'open' })
+      .appendChild(section);
   }
 }
 
