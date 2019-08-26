@@ -8,11 +8,12 @@ const FILES_URL = 'https://api.github.com/repos/kowalus23/portfolio-book-posts/c
 const FORBIDDEN_REPOS = ['basic-hooks-usage', 'ES6-exercises', 'Project-Warsztaty'];
 const POST_NAME = /(\d+)\.md/;
 
-const convert = ({ name, stargazers_count: stars, license, ...rest }) => new GitHubRepo(
+const convert = ({ name, stargazers_count: stars, license, html_url: url, ...rest }) => new GitHubRepo(
   {
     name,
     stars,
     license: license ? license.spdx_id : '',
+    url,
     rest
   }
 );

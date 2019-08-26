@@ -1,5 +1,5 @@
-import getRepos from './service';
+import {GitHubRepos} from './component';
 
 export default async function () {
-  (await getRepos()).forEach(repo => console.log(repo))
+  customElements.define('gh-repos', GitHubRepos);
 }

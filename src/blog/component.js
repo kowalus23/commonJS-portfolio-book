@@ -1,5 +1,4 @@
 import { getBlogPost, getBlogPostNames } from '../github/service';
-import style from './style.scss';
 
 class HtmlElementWithContent extends HTMLElement {
   constructor(tag, tagStyle, content) {
