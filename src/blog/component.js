@@ -1,3 +1,4 @@
+import { dom } from '@fortawesome/fontawesome-svg-core';
 import { getBlogPost, getBlogPostNames } from '../github/service';
 import './style.scss';
 
@@ -76,8 +77,8 @@ export class Body extends HTMLElement {
           } else {
             this.render();
           }
-        })
-    })
+        });
+    });
   }
 
   renderStyles() {
@@ -135,9 +136,9 @@ export class BlogPost extends HTMLElement {
   }
 
   async render() {
-    this.clean();
-    const fullPost = this.getAttribute('full-post') === 'true';
+    this.loading();
     const name = this.getAttribute('post-name');
+    const fullPost = this.getAttribute('full-post') === 'true';
     const content = (await getBlogPost(`${name}.md`));
     this.shadowRoot.innerHTML = (`
       <article>
@@ -154,7 +155,12 @@ export class BlogPost extends HTMLElement {
     `);
   }
 
-  clean() {
-    this.shadow.childNodes.forEach(child => child.remove());
+  loading() {
+    this.shadowRoot.innerHTML = '';
+    this.shadowRoot.appendChild(document.getElementById('blog-loading')
+      .content
+      .cloneNode(true)
+      .firstElementChild);
+    dom.i2svg({ node: this.shadowRoot });
   }
 }

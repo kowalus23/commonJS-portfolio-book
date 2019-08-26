@@ -1,5 +1,10 @@
 {
   "name": "portfolio",
+  "sideEffects": [
+    "./src/some-side-effectful-file.js",
+    "*.scss",
+    "*.css"
+  ],
   "version": "0.1.0",
   "description": "basic portfolio, with small blog part, and redirects to github repos",
   "main": "src/index.js",
@@ -14,6 +19,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.22",
     "@fortawesome/free-brands-svg-icons": "^5.10.2",
+    "@fortawesome/free-solid-svg-icons": "^5.10.2",
     "markdown-element": "^2.0.2"
   },
   "devDependencies": {

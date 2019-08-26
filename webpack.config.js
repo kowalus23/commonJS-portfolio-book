@@ -12,6 +12,9 @@ module.exports = {
     compress: true,
     port: 9000
   },
+  performance: {
+    hints: false
+  },
   module: {
     rules: [
       {
@@ -41,10 +44,10 @@ module.exports = {
         from: 'src/img',
         to: 'img'
       },
-      {
-        from: 'src/blog/img',
-        to: 'blog/img'
-      }
+      // {
+      //   from: 'src/blog/img',
+      //   to: 'blog/img'
+      // }
     ]),
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
