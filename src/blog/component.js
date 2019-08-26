@@ -113,6 +113,12 @@ export class BlogPost extends HTMLElement {
     const md = document.createElement('mark-down');
     md.textContent = (await getBlogPost(`${name}.md`));
     this.shadow.appendChild(md);
+    this.shadow.appendChild(document.createElement('style')).innerHTML = `
+      pre {
+      width: 100%;
+      overflow-X: scroll;
+      }
+    `
   }
 
   clean() {
