@@ -1,17 +1,40 @@
 import { getBlogPost } from '../github/service';
 import style from './style.scss';
 
-export class Header extends HTMLElement {
-  constructor() {
+class HtmlElementWithContent extends HTMLElement {
+  constructor(tag, tagStyle, content) {
     super();
-    const header = document.createElement('header');
-    header.innerHTML = `
-        <div class="${style.container}">
-				    <h1 class="${style['header-heading']}">From Advanced to Basics</h1>
-			  </div>
+    const element = document.createElement(tag);
+    element.className = tagStyle;
+    element.innerHTML = `
+      <div class="container">
+        ${content}
+      </div>
     `;
-    this.attachShadow({ mode: 'open' })
-      .appendChild(header);
+    this.appendChild(element);
+  }
+}
+
+export class Header extends HtmlElementWithContent {
+  constructor() {
+    super('header', 'header', `
+     
+				        <h1 class="header-heading">From Advanced to Basics</h1>
+		
+    `);
+
+  }
+}
+
+export class Navigation extends HtmlElementWithContent {
+  constructor() {
+    super('nav', 'nav-bar', `
+        <ul class="nav">
+				    <li><a href="#">Blog</a></li>
+				    <li><a href="#">Contact</a></li>
+				    <li><a href="../index.html">About me</a></li>
+			  </ul>
+    `);
   }
 }
 
