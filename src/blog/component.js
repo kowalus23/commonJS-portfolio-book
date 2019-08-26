@@ -1,4 +1,5 @@
 import { getBlogPost, getBlogPostNames } from '../github/service';
+import './style.scss';
 
 class HtmlElementWithContent extends HTMLElement {
   constructor(tag, tagStyle, content) {
@@ -50,8 +51,8 @@ export class Body extends HTMLElement {
     const fullPost = !!name;
     const posts = fullPost ? [name] : await getBlogPostNames();
     this.shadowRoot.innerHTML = (`
-     <section>
        ${this.renderStyles()}
+     <section>
       <div class="container">
        <main>
         ${posts.reverse()

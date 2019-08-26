@@ -1,4 +1,3 @@
-//   import getRepos from './service';
 import getRepos from './service';
 
 export class GitHubRepos extends HTMLElement {
